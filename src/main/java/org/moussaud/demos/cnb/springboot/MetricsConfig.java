@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.alexandreroman.demos.cnb.springboot;
+package org.moussaud.demos.cnb.springboot;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;

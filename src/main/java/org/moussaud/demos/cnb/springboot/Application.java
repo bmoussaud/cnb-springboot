@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.alexandreroman.demos.cnb.springboot;
+package org.moussaud.demos.cnb.springboot;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
